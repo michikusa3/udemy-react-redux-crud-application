@@ -8,13 +8,18 @@ import { Provider } from 'react-redux';
 import './index.css';
 import reducer from './reducers';
 // componentは一つのフォルダ内で一括管理したほうがわかりやすい
-import App from './component/App';
+import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 // アプリ内で唯一　
 // アプリ内の全てのstateはココに集約される
 const store =  createStore(reducer)
 // アプリ内の全てのコンポーネントから参照できるようにする
 // 既存のコンポーネントをProviderコンポーネントでラップする。Store属性に渡す。
-
-ReactDOM.render(<App />, document.getElementById('root'));
+// propsのバケツリレーを使用しなくて良くなる
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>
+    ,
+    document.getElementById('root'));
 registerServiceWorker();
